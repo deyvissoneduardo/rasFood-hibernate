@@ -1,6 +1,8 @@
 package br.com.rasfood.service.test;
 
+import br.com.rasfood.dao.PratoDao;
 import br.com.rasfood.entity.Prato;
+import br.com.rasfood.utils.JPAUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,11 +17,10 @@ public class PratoService {
         risoto.setDisponivel(true);
         risoto.setValor(BigDecimal.valueOf(88.55));
 
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("rasFood");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
+        EntityManager entityManager = JPAUtils.getEntityManagerRasFood();
+        PratoDao pratoDao = new PratoDao(entityManager);
         entityManager.getTransaction().begin();
-        entityManager.persist(risoto);
+        pratoDao.salvar(risoto);
         entityManager.getTransaction().commit();
         entityManager.close();
 
