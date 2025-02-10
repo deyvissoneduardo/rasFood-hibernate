@@ -3,6 +3,7 @@ package br.com.rasfood.dao;
 import br.com.rasfood.entity.Categoria;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 public class CategoriaDao {
 
@@ -26,5 +27,9 @@ public class CategoriaDao {
 
     public void editar(Categoria categoria) {
         this.entityManager.merge(categoria);
+    }
+
+    public List<Categoria> listar() {
+        return this.entityManager.createQuery("from Categoria", Categoria.class).getResultList();
     }
 }
