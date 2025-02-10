@@ -14,7 +14,6 @@ public class PratoDao {
 
     public void salvar(final Prato prato) {
         this.entityManager.persist(prato);
-        System.out.println("Salvo com sucesso! " + prato);
     }
 
     public Prato buscarPorId(final Integer id) {
