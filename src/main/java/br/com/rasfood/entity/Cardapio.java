@@ -3,6 +3,7 @@ package br.com.rasfood.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "cardapio")
@@ -20,14 +21,11 @@ public class Cardapio {
 
     private BigDecimal valor;
 
-    /*
-     * ManyToOne
-     * ManyToMany
-     * OneToMany
-     * OneToOne
-     * */
     @ManyToOne
     private Categoria categoria;
+
+    @ManyToMany(mappedBy = "cardapioList")
+    private List<Ordem> ordems;
 
     @Column(name = "data_de_registro")
     private LocalDateTime dataDeRegistro = LocalDateTime.now();
