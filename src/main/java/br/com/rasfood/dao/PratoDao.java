@@ -12,8 +12,20 @@ public class PratoDao {
         this.entityManager = entityManager;
     }
 
-    public void salvar(Prato prato) {
+    public void salvar(final Prato prato) {
         this.entityManager.persist(prato);
         System.out.println("Salvo com sucesso! " + prato);
+    }
+
+    public Prato buscarPorId(final Integer id) {
+        return this.entityManager.find(Prato.class, id);
+    }
+
+    public void excluir(final Prato prato) {
+        this.entityManager.remove(prato);
+    }
+
+    public void editar(final Prato prato) {
+        this.entityManager.merge(prato);
     }
 }
