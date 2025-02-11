@@ -65,7 +65,7 @@ public class CargaDadosUtils {
         cardapioDao.salvar(caprese);
         cardapioDao.salvar(caesar);
         cardapioDao.salvar(chevre);
-        entityManager.getTransaction().commit();
+        entityManager.flush();
         entityManager.clear();
     }
 }
