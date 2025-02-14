@@ -6,6 +6,7 @@ import br.com.rasfood.entity.Ordem;
 import javax.persistence.EntityManager;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class OrdemDao {
 
@@ -48,6 +49,21 @@ public class OrdemDao {
                     .createQuery("SELECT c FROM Ordem c WHERE UPPER(c.cliente) = UPPER(:nome) ", Ordem .class)
                     .setParameter("nome", nome)
                     .getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+    }
+
+    public List<Object[]> itensMaisVendidos() {
+        try{
+            String sql = "SELECT c.nome, SUM(oc.quantidade) FROM Ordem o " +
+                    "JOIN OrdensCardapio oc on o.id = oc.cardapio.id " +
+                    "JOIN oc.cardapio c " +
+                    "GROUP BY c.nome " +
+                    "ORDER BY SUM(oc.quantidade) DESC";
+            return this.entityManager
+                    .createQuery(sql, Object[] .class)
+                    .getResultList();
         }catch (Exception e){
             return null;
         }

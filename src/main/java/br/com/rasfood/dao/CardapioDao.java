@@ -33,7 +33,9 @@ public class CardapioDao {
 
     public List<Cardapio> listar() {
         try {
-            return this.entityManager.createQuery("from Cardapio", Cardapio.class).getResultList();
+            return this.entityManager
+                    .createQuery("SELECT c FROM Cardapio c", Cardapio.class)
+                    .getResultList();
         } catch (Exception e) {
             return Collections.emptyList();
         }
